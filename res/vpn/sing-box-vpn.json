@@ -1,0 +1,139 @@
+{
+    "log": {
+        "level": "info"
+    },
+    "dns": {
+        "servers": [
+            {
+                "type": "https",
+                "tag": "dns-remote",
+                "server": "8.8.8.8",
+                "detour": "neko-socks"
+            },
+            {
+                "tag": "dns-direct",
+                //%DNS_DIRECT_OPTS%
+            },
+            {
+                "type": "fakeip",
+                "tag": "dns-fake",
+                "inet4_range": "198.18.0.0/15",
+                "inet6_range": "fc00::/18"
+            }
+        ],
+        "rules": [
+            {
+                "query_type": [
+                    32,
+                    33
+                ],
+                "action": "predefined",
+                "rcode": "NOERROR"
+            },
+            {
+                "domain_suffix": [
+                    ".lan"
+                ],
+                "action": "predefined",
+                "rcode": "NOERROR"
+            },
+            {
+                "process_name": [
+                    "nekoray_core",
+                    "nekoray_core.exe",
+                    "nekobox_core",
+                    "nekobox_core.exe"
+                ],
+                "server": "dns-direct"
+            },
+            {
+                "inbound": "%FAKE_DNS_INBOUND%",
+                "server": "dns-fake"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "interface_name": "%TUN_NAME%",
+            "address": [
+                %TUN_ADDRESS%
+            ],
+            "mtu": %MTU%,
+            "auto_route": true,
+            "strict_route": %STRICT_ROUTE%,
+            "stack": "%STACK%",
+            "endpoint_independent_nat": true
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "socks",
+            "tag": "neko-socks",
+            "udp_fragment": true,
+            //%SOCKS_USER_PASS%
+            "server": "127.0.0.1",
+            "server_port": %PORT%
+        },
+        {
+            "type": "direct",
+            "tag": "direct"
+        }
+    ],
+    "route": {
+        "final": "%FINAL_OUT%",
+        "auto_detect_interface": true,
+        "rules": [
+            {
+                "network": "udp",
+                "port": [
+                    135,
+                    137,
+                    138,
+                    139,
+                    5353
+                ],
+                "action": "reject"
+            },
+            {
+                "ip_cidr": [
+                    "224.0.0.0/3",
+                    "ff00::/8"
+                ],
+                "action": "reject"
+            },
+            {
+                "source_ip_cidr": [
+                    "224.0.0.0/3",
+                    "ff00::/8"
+                ],
+                "action": "reject"
+            },
+            {
+                "port": 53,
+                "process_name": [
+                    "nekoray_core",
+                    "nekoray_core.exe"
+                ],
+                "action": "hijack-dns"
+            },
+            {
+                "process_name": [
+                    "nekoray_core",
+                    "nekoray_core.exe",
+                    "nekobox_core",
+                    "nekobox_core.exe"
+                ],
+                "outbound": "direct"
+            }
+            //%PROCESS_NAME_RULE%
+            //%CIDR_RULE%
+            ,
+            {
+                "port": 53,
+                "action": "hijack-dns"
+            }
+        ]
+    }
+}
