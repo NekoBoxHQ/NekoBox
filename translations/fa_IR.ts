@@ -717,7 +717,7 @@ For more information, see the document &quot;Configuration/DNS&quot;.</source>
         <source>If you have trouble starting VPN, you can force reset nekobox_core process here.
 
 If still not working, see documentation for more information.
-https://github.com/lima-droid/NekoBox/tree/main/docs</source>
+https://github.com/NekoBoxHQ/NekoBox/tree/main/docs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

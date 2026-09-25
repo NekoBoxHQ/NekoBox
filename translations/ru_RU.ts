@@ -726,11 +726,11 @@ This needs to be run NekoBox with administrator privileges.</source>
         <source>If you have trouble starting VPN, you can force reset nekobox_core process here.
 
 If still not working, see documentation for more information.
-https://github.com/lima-droid/NekoBox/tree/main/docs</source>
+https://github.com/NekoBoxHQ/NekoBox/tree/main/docs</source>
         <translation>Если у вас проблемы с запуском VPN, можно принудительно перезапустить процесс nekobox-core.
 
 Если ничего по-прежнему не работает, ознакомьтесь с документацией:
-https://github.com/lima-droid/NekoBox/tree/main/docs</translation>
+https://github.com/NekoBoxHQ/NekoBox/tree/main/docs</translation>
     </message>
     <message>
         <source>Reset</source>

@@ -19,7 +19,7 @@ jobs:
 
       - name: 获取项目当前使用的 sing-box 版本
         run: |
-          CUR=$(curl -s https://raw.githubusercontent.com/lima-droid/NekoBox/main/go/cmd/nekobox_core/go.mod | grep 'sagernet/sing-box ' | head -1 | awk '{print $2}')
+          CUR=$(curl -s https://raw.githubusercontent.com/NekoBoxHQ/NekoBox/main/go/cmd/nekobox_core/go.mod | grep 'sagernet/sing-box ' | head -1 | awk '{print $2}')
           echo "CURRENT_TAG=${CUR}" >> $GITHUB_ENV
 
       - name: 比较版本并创建提醒 Issue
@@ -36,10 +36,10 @@ jobs:
           NEWER=$(printf '%s\n' "$UP" "$CUR" | sort -V | tail -1)
           if [ "$NEWER" = "$UP" ] && [ "$UP" != "$CUR" ]; then
             TITLE="sing-box 上游发布新版本 v${UP}（当前 v${CUR}），请安排内核同步"
-            EXISTS=$(gh issue list --repo lima-droid/NekoBox --state open --search "sing-box 上游发布新版本" --json number --jq 'length' || echo 0)
+            EXISTS=$(gh issue list --repo NekoBoxHQ/NekoBox --state open --search "sing-box 上游发布新版本" --json number --jq 'length' || echo 0)
             if [ "$EXISTS" = "0" ]; then
-              BODY=$(printf '上游 sing-box（sagernet/sing-box）已发布 v%s，项目当前依赖 v%s。\n\n内核同步步骤：\n1. 同步 sing-box fork（lima-droid/sing-box 拉取上游 v%s）\n2. bump 依赖：go/cmd/nekobox_core/go.mod 中 github.com/sagernet/sing-box 版本号改为 v%s\n3. 本地重编 nekobox_core + 全链路测试（代理连通、协议导入验证）\n4. 协议对齐：若 sing-box 新增协议/参数，补 Bean 导入支持并更新 docs/ProtocolImport.md\n5. 发版：bump NEKO_VERSION → tag → CI 自动构建 → Release\n6. 客户端「检查更新」自动升级' "$UP" "$CUR" "$UP" "$UP")
-              gh issue create --repo lima-droid/NekoBox --title "$TITLE" --body "$BODY"
+              BODY=$(printf '上游 sing-box（sagernet/sing-box）已发布 v%s，项目当前依赖 v%s。\n\n内核同步步骤：\n1. 同步 sing-box fork（NekoBoxHQ/sing-box 拉取上游 v%s）\n2. bump 依赖：go/cmd/nekobox_core/go.mod 中 github.com/sagernet/sing-box 版本号改为 v%s\n3. 本地重编 nekobox_core + 全链路测试（代理连通、协议导入验证）\n4. 协议对齐：若 sing-box 新增协议/参数，补 Bean 导入支持并更新 docs/ProtocolImport.md\n5. 发版：bump NEKO_VERSION → tag → CI 自动构建 → Release\n6. 客户端「检查更新」自动升级' "$UP" "$CUR" "$UP" "$UP")
+              gh issue create --repo NekoBoxHQ/NekoBox --title "$TITLE" --body "$BODY"
               echo "已创建提醒 Issue：$TITLE"
             else
               echo "已存在同类提醒 Issue，跳过"

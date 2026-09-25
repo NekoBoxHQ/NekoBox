@@ -21,7 +21,7 @@ var update_download_url string
 // fetchLatestTagFromAtom 通过 GitHub releases.atom（RSS）获取最新发布 tag，
 // 用于 API 限流（403）时的备用版本确认。
 func fetchLatestTagFromAtom(client *http.Client) string {
-	req, err := http.NewRequest("GET", "https://github.com/lima-droid/NekoBox/releases.atom", nil)
+	req, err := http.NewRequest("GET", "https://github.com/NekoBoxHQ/NekoBox/releases.atom", nil)
 	if err != nil {
 		return ""
 	}
@@ -58,7 +58,7 @@ func (s *BaseServer) Update(ctx context.Context, in *gen.UpdateReq) (*gen.Update
 		ctx, cancel := context.WithTimeout(ctx, time.Second*10)
 		defer cancel()
 
-		req, _ := http.NewRequestWithContext(ctx, "GET", "https://api.github.com/repos/lima-droid/NekoBox/releases", nil)
+		req, _ := http.NewRequestWithContext(ctx, "GET", "https://api.github.com/repos/NekoBoxHQ/NekoBox/releases", nil)
 		req.Header.Set("User-Agent", "NekoBox/"+strings.TrimPrefix(neko_common.Version_neko, "nekoray-"))
 		req.Header.Set("Accept", "application/vnd.github+json")
 		resp, err := client.Do(req)
@@ -86,10 +86,10 @@ func (s *BaseServer) Update(ctx context.Context, in *gen.UpdateReq) (*gen.Update
 					assetName = "NekoBox-macOS-" + runtime.GOARCH + ".zip"
 				}
 				if assetName != "" {
-					update_download_url = "https://github.com/lima-droid/NekoBox/releases/download/" + latestTag + "/" + assetName
+					update_download_url = "https://github.com/NekoBoxHQ/NekoBox/releases/download/" + latestTag + "/" + assetName
 					ret.AssetsName = assetName
 					ret.DownloadUrl = update_download_url
-					ret.ReleaseUrl = "https://github.com/lima-droid/NekoBox/releases/tag/" + latestTag
+					ret.ReleaseUrl = "https://github.com/NekoBoxHQ/NekoBox/releases/tag/" + latestTag
 					return ret, nil // update
 				}
 				ret.Error = fmt.Sprintf("发现新版本 %s，但当前平台不受支持", latestTag)

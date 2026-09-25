@@ -3,7 +3,7 @@
 A modern sing-box GUI client. 单内核 · 稳定优先 · 最小复杂度
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![sing-box](https://img.shields.io/badge/sing--box-1.14.2-blue)](https://github.com/lima-droid/sing-box)
+[![sing-box](https://img.shields.io/badge/sing--box-1.14.2-blue)](https://github.com/NekoBoxHQ/sing-box)
 
 ## 界面展示
 
@@ -35,7 +35,7 @@ NekoBox 是一款独立维护的现代 sing-box GUI 客户端，仅使用 sing-b
 
 ### Windows
 
-1. 从 [Releases](https://github.com/lima-droid/NekoBox/releases/latest) 下载 `NekoBox-Windows64.zip`
+1. 从 [Releases](https://github.com/NekoBoxHQ/NekoBox/releases/latest) 下载 `NekoBox-Windows64.zip`
 2. 解压后运行 `NekoBox.exe`
 
 若提示缺少运行库，请安装 [微软 C++ 运行库](https://aka.ms/vs/17/release/vc_redist.x64.exe)。
@@ -60,12 +60,12 @@ Linux 运行教程见 [docs/Run_Linux.md](docs/Run_Linux.md)。
 ## 构建
 
 ```bash
-git clone https://github.com/lima-droid/NekoBox
+git clone https://github.com/NekoBoxHQ/NekoBox
 ```
 
 推送 tag 后由 GitHub Actions 自动构建并发布。
 
-技术文档见 [docs](https://github.com/lima-droid/NekoBox/tree/main/docs)。
+技术文档见 [docs](https://github.com/NekoBoxHQ/NekoBox/tree/main/docs)。
 
 ## 讨论群组
 

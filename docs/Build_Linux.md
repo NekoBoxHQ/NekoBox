@@ -3,7 +3,7 @@
 ## git clone 源码
 
 ```
-git clone https://github.com/lima-droid/NekoBox.git --recursive
+git clone https://github.com/NekoBoxHQ/NekoBox.git --recursive
 ```
 
 ## 简单编译法
