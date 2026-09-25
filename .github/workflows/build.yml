@@ -32,8 +32,8 @@ jobs:
         shell: bash
         run: |
           cd "$GITHUB_WORKSPACE/.."
-          git clone --depth 1 https://github.com/NekoBoxHQ/libneko.git libneko
-          git clone --depth 1 https://github.com/NekoBoxHQ/sing-box.git sing-box
+          git clone --depth 1 https://x-access-token:${{ secrets.NEKO_GH_TOKEN }}@github.com/NekoBoxHQ/libneko.git libneko
+          git clone --depth 1 https://x-access-token:${{ secrets.NEKO_GH_TOKEN }}@github.com/NekoBoxHQ/sing-box.git sing-box
 
       - name: Build nekobox_core
         shell: bash
@@ -184,8 +184,8 @@ jobs:
         shell: bash
         run: |
           cd "$GITHUB_WORKSPACE/.."
-          git clone --depth 1 https://github.com/NekoBoxHQ/libneko.git libneko
-          git clone --depth 1 https://github.com/NekoBoxHQ/sing-box.git sing-box
+          git clone --depth 1 https://x-access-token:${{ secrets.NEKO_GH_TOKEN }}@github.com/NekoBoxHQ/libneko.git libneko
+          git clone --depth 1 https://x-access-token:${{ secrets.NEKO_GH_TOKEN }}@github.com/NekoBoxHQ/sing-box.git sing-box
 
       - name: Build nekobox_core
         shell: bash
